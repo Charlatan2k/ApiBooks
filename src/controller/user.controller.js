@@ -73,16 +73,21 @@ const addBook = async (req, res) => {
 };
 
 const updateBook = async (req, res) => {
-  const { id_book, id_user, title, b_type, autor, price, photo } = req.body;
-  const newBook = { id_book, id_user, title, b_type, autor, price, photo };
+  console.log("req.body:", req.body);
+  const { id_book: bookId, title, b_type, autor, price, photo } = req.body;
 
-  // Log id_user and newBook
-  console.log("id_user:", id_user);
-  console.log("newBook:", newBook);
+  const newBook = {
+    id_book: bookId,
+    title,
+    b_type,
+    autor,
+    price,
+    photo,
+  };
 
-  const [result] = await pool.query("UPDATE book SET ? WHERE id = ?", [
+  const [result] = await pool.query("UPDATE book SET ? WHERE id_book = ?", [
     newBook,
-    id_book,
+    bookId,
   ]);
   res.send(result);
 };
@@ -94,4 +99,5 @@ module.exports = {
   getBooks,
   getSpecificBook,
   addBook,
+  updateBook,
 };
