@@ -16,6 +16,8 @@ router.post("/books", usersCtrl.addBook);
 
 router.put("/books", usersCtrl.updateBook);
 
-// router.delete("/books", usersCtrl.deleteBook);
+router.delete("/books", usersCtrl.deleteBook);
+
+router.put("/usuarios", usersCtrl.updateUser);
 
 module.exports = router;

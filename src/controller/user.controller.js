@@ -92,6 +92,29 @@ const updateBook = async (req, res) => {
   res.send(result);
 };
 
+const deleteBook = async (req, res) => {
+  const id_book = req.query.id_book;
+  const [result] = await pool.query("DELETE FROM book WHERE id_book = ?", [
+    id_book,
+  ]);
+  res.send(result);
+};
+const updateUser = async (req, res) => {
+  const { id_user, first_name, last_name, email, photo } = req.body;
+  const newUser = {
+    id_user,
+    first_name,
+    last_name,
+    email,
+    photo,
+  };
+  const [result] = await pool.query("UPDATE user SET ? WHERE id_user = ?", [
+    newUser,
+    id_user,
+  ]);
+  res.send(result);
+};
+
 module.exports = {
   welcome,
   register,
@@ -100,4 +123,6 @@ module.exports = {
   getSpecificBook,
   addBook,
   updateBook,
+  deleteBook,
+  updateUser,
 };
